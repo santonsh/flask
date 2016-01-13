@@ -1,0 +1,104 @@
+#!/bin/bash          
+echo This is a simple flask server test script
+curl -X POST -H "Content-Type: text/xml" -d '
+<configuration ctrlId="Gateway1">
+	<devices mode="COMPLETE">
+		<resource id="newFirmware" type="firmware">
+			<param key="content">ABCDEF</param>
+			<param key="content-encoding">base64</param>
+		</resource>
+		<resource id="newFirmware2" type="firmware">
+			<param key="content">ABCDEF</param>
+			<param key="content-encoding">base64</param>
+		</resource>
+		<params>
+			<param key="firmware" resourceId="newFirmware" />
+		</params>
+		<device id="Gateway1" ctrlId="Gateway1" networkId="0" type="controller">
+			<params>
+				<param key="longitude">5.123456</param>
+				<param key="latitude">33.123456</param>
+			</params>		
+		</device>
+		<device id="LightPoint1" ctrlId="Gateway1" networkId="1" type="streetlight">
+			<params>
+				<param key="power">150</param>
+				<param key="macaddress">ABCD1234EFGH</param>				
+				<param key="controlOutput">DALI</param>
+				<param key="longitude">5.123456</param>
+				<param key="latitude">33.123456</param>
+				<param key="dimmingGroup">Group1</param>
+			</params>		
+		</device>
+		<device id="LightPoint2" ctrlId="Gateway1" networkId="2" type="streetlight">
+			<params>
+				<param key="power">150</param>
+				<param key="macaddress">ABCD1234EFGH</param>				
+				<param key="controlOutput">DALI</param>
+				<param key="longitude">5.123456</param>
+				<param key="latitude">33.123456</param>
+				<param key="dimmingGroup">Group1</param>
+			</params>		
+		</device>
+		<device id="Cam1" ctrlId="Gateway1" networkId="3" type="camera">
+			<params>
+				<param key="longitude">5.123456</param>
+				<param key="latitude">33.123456</param>
+			</params>		
+		</device>
+	</devices>
+	<schedulers mode="COMPLETE">
+		<controlPrograms>
+			<controlProgram id="13">
+				<command time="SUNSET+5">0</command>
+				<command time="20:13">33</command>
+				<command time="00:13">70</command>
+				<command time="SUNRISE-10">0</command>
+			</controlProgram>
+			<controlProgram id="52">
+				<command time="SUNSET-15">15</command>
+				<command time="20:13">33</command>
+				<command time="00:13">70</command>
+				<command time="SUNRISE+15">0</command>
+			</controlProgram>
+		</controlPrograms>
+		<calendars>
+			<calendar id="GroupOfLightPoint1">
+				<rule profile="daybased">
+					<day>M,T,W,TH,F,S,SU</day>
+					<controlProgram>13</controlProgram>
+					<priority>33</priority>
+				</rule>
+				<rule profile="daybased">
+					<day>W</day>
+					<controlProgram>52</controlProgram>
+					<priority>55</priority>
+				</rule>
+				<rule profile="datebased">
+					<start>22/06</start>
+					<end>24/09</end>
+					<controlProgram>52</controlProgram>
+					<priority>77</priority>
+				</rule>
+			</calendar>
+			<calendar id="DimmingGroup2">
+				<rule profile="daybased">
+					<day>M,T,W,TH,F,S,SU</day>
+					<controlProgram>13</controlProgram>
+					<priority>33</priority>
+				</rule>
+					<rule profile="daybased">
+					<day>W</day>
+					<controlProgram>52</controlProgram>
+					<priority>55</priority>
+				</rule>
+					<rule profile="datebased">
+					<start>22/06</start>
+					<end>24/09</end>
+					<controlProgram>52</controlProgram>
+					<priority>77</priority>
+				</rule>
+			</calendar>
+		</calendars>
+	</schedulers>
+</configuration>' http://127.0.0.1:5000/

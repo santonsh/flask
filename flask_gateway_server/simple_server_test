@@ -1,0 +1,3 @@
+#!/bin/bash          
+echo This is a simple flask server test script
+curl -X POST -H "Content-Type: text/xml" -d '<Body>Hello, it worked!</Body>' http://127.0.0.1:5000/
