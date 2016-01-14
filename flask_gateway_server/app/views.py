@@ -1,6 +1,5 @@
 from app import app
 from flask import request
-from bs4 import BeautifulSoup
 import xmltodict
 from app import db, models
 import time
