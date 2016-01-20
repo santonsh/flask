@@ -25,6 +25,7 @@ Global sever installation/start
 
 1. Install python
 2. Install virtualenv
+3. Instal supervisor - sudo apt-get install -y supervisor
 3. git clone reef_gateway
    reef_gateway already includes virtual environment with flask, sqlalchemy, Flask-SQLAlchemy and xmltodict along with flask server application 
 4. Activate virtual enviroment - source venv/bin/activate
